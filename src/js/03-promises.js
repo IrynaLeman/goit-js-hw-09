@@ -5,20 +5,14 @@ const stepEl = document.querySelector('input[name="step"]');
 const amountEl = document.querySelector('input[name="amount"]');
 const formEl = document.querySelector('.form');
 const startBtn = document.querySelector('button[type="submit"]');
+
 formEl.addEventListener('submit', onFormSubmit);
-// console.log('asdasd');
+
 function onFormSubmit(e) {
   e.preventDefault();
   
   startBtn.disabled = true;
 
-
-  // ------------Не розумію чому не працює деструктурізація, не бачить Елементс----
-  // const {
-  //   elements: { delay, step, amount },
-  // } = e.currentTarget;
-  // console.log(elements);
-  // --------------------------------------------------------------------------------
   let delayValue = Number(delayEl.value);
   let stepValue = Number(stepEl.value);
   let amountValue = Number(amountEl.value);
@@ -47,12 +41,12 @@ function onFormSubmit(e) {
 function createPromise(position, delay) {
   const shouldResolve = Math.random() > 0.3;
 
-  return new Promise((Res, Rej) => {
+  return new Promise((Resolve, Rejected) => {
     setTimeout(() => {
       if (shouldResolve) {
-        Res({ position, delay });
+        Resolve({ position, delay });
       } else {
-        Rej({ position, delay });
+        Rejected({ position, delay });
       }
     }, delay);
   });
@@ -65,4 +59,3 @@ function onOff(total) {
 }
 
 
-console.log('12r12');
