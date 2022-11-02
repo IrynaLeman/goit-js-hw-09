@@ -18,10 +18,7 @@ const options = {
   },
 };
 
-Notify.init({
-  position: 'center-top',
-  closeButton: false,
-});
+
 
 const refs = {
   days: document.querySelector('[data-days]'),
@@ -43,20 +40,17 @@ refs.startBtn.addEventListener('click', onStart);
 function onStart() {
   refs.startBtn.disabled = true;
   const startTime = dataPickr.selectedDates[0];
-  console.log('startTime',startTime);
+  //console.log('startTime',startTime);
   setInterval(() => {
     const currentTime = Date.now();
-    console.log('currentTime', currentTime);
+    //console.log('currentTime', currentTime);
     const deltaTime = startTime - currentTime;
-    console.log('deltaTime',deltaTime);
+    //console.log('deltaTime',deltaTime);
     const time = convertMs(deltaTime);
     
     refs.days.textContent = time.days;
-    
-    refs.hours.textContent = time.hours;
-    
-    refs.minutes.textContent = time.minutes;
-    
+    refs.hours.textContent = time.hours;    
+    refs.minutes.textContent = time.minutes;    
     refs.seconds.textContent = time.seconds;
     
   }, 1000);
@@ -95,3 +89,8 @@ function convertMs(ms) {
 function onClick() {
   refs.days.innerHTML()
 }
+
+Notify.init({
+  position: 'center-top',
+  closeButton: false,
+});
