@@ -37,11 +37,13 @@ const dataPickr = new flatpickr(refs.dataTimePicker, options);
 
 
 refs.startBtn.addEventListener('click', onStart);
+
 function onStart() {
   refs.startBtn.disabled = true;
   const startTime = dataPickr.selectedDates[0];
   //console.log('startTime',startTime);
-  setInterval(() => {
+  let timerId = null;
+    timerId = setInterval(() => {
     const currentTime = Date.now();
     //console.log('currentTime', currentTime);
     const deltaTime = startTime - currentTime;
@@ -49,13 +51,19 @@ function onStart() {
     const time = convertMs(deltaTime);
     
     refs.days.textContent = time.days;
-    refs.hours.textContent = time.hours;    
-    refs.minutes.textContent = time.minutes;    
+    refs.hours.textContent = time.hours;
+    refs.minutes.textContent = time.minutes;
     refs.seconds.textContent = time.seconds;
+
+    if (deltaTime <= 0) {
+      clearInterval(timerId);
+      return;
+      }
+      
     
   }, 1000);
-}
 
+}
 function addPrevSymbol(value) {
   return String(value).padStart(2, '0');
 }
